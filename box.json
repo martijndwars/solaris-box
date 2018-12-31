@@ -1,27 +1,28 @@
 {
-	"builders": [{
-		"type": "virtualbox-ovf",
-		"source_path": "sol-11_4-vbox.ova",
+    "builders": [{
+        "type": "virtualbox-ovf",
+        "source_path": "sol-11_4-vbox.ova",
         "checksum_type": "sha256",
         "checksum": "a6487e6c482623e5cfe4697731df4006ae4933298141f4dadf45964d470d9efd",
-		"ssh_username": "1vagrant",
-		"ssh_password": "vagrant",
-		"ssh_port": 22,
-		"shutdown_command": "echo 'packer' | sudo -S shutdown -P now",
+        "ssh_username": "vagrant",
+        "ssh_password": "1vagrant",
+        "ssh_port": 22,
+        "shutdown_command": "sudo /usr/sbin/shutdown -g 0 -y -i 5",
         "boot_wait": "5s",
-		"boot_command": [
+        "boot_command": [
             "27<enter><wait>",
-            "3<enter><wait10>",
-            "<wait10><wait10><wait10><wait10><wait10>",
+            "3<enter><wait>",
+            "<wait10><wait10><wait10>",
+            "<wait10><wait10><wait10>",
             "<f2><wait>",
-			"vagrant<wait5>",
-			"<f2><wait>",
-			"<wait5>",
-			"<f2><wait>",
-			"<wait5>",
-			"<f2><wait>",
+            "vagrant<wait5>",
+            "<f2><wait>",
+            "<wait5>",
+            "<f2><wait>",
+            "<wait5>",
+            "<f2><wait>",
             "e<wait5>",
-			"<f2><wait>",
+            "<f2><wait>",
             "n<wait5>",
             "<f2><wait>",
             "<wait5>",
@@ -36,40 +37,40 @@
             "<f2><wait>",
             "vagrant123<tab><wait>",
             "vagrant123<tab><wait>",
-			"vagrant<tab><wait>",
-			"vagrant<tab><wait>",
-			"1vagrant<tab><wait>",
-			"1vagrant<tab><wait>",
-			"<f2><wait>",
-			"<f2><wait>",
-			"<f2><wait10>",
+            "vagrant<tab><wait>",
+            "vagrant<tab><wait>",
+            "1vagrant<tab><wait>",
+            "1vagrant<tab><wait>",
+            "<f2><wait>",
+            "<f2><wait>",
+            "<f2><wait>",
             "<wait10><wait10><wait10>",
             "<wait10><wait10><wait10>",
             "<wait10><wait10><wait10>",
             "<wait10><wait10><wait10>",
             "<wait10><wait10><wait10>",
-			"<leftCtrlOn><leftAltOn><f1><leftAltOff><leftCtrlOff><wait10>",
-			"vagrant<enter><wait>",
-			"1vagrant<enter><wait>",
-			"sudo bash<enter><wait>",
-			"1vagrant<enter><wait>",
-			"echo 'vagrant ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers<enter><wait>",
-			"/usr/gnu/bin/sed -i 's/^.*requiretty/#Defaults requiretty/' /etc/sudoers<enter><wait>",
-			"exit<enter><wait>",
-			"exit<enter><wait>"
-		]
-	}],
-	"provisioners": [{
-		"type": "shell",
-		"execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-		"scripts": [
-			"scripts/vmtools.sh",
-			"scripts/postinstall.sh"
-		]
-	}],
-	"post-processors": [{
-		"type": "vagrant",
-		"output": "build/solaris11.box",
-		"compression_level": 9
-	}]
+            "<leftCtrlOn><leftAltOn><f1><leftAltOff><leftCtrlOff><wait10>",
+            "vagrant<enter><wait>",
+            "1vagrant<enter><wait>",
+            "sudo bash<enter><wait>",
+            "1vagrant<enter><wait>",
+            "echo 'vagrant ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers<enter><wait>",
+            "/usr/gnu/bin/sed -i 's/^.*requiretty/#Defaults requiretty/' /etc/sudoers<enter><wait>",
+            "exit<enter><wait>",
+            "exit<enter><wait>"
+        ]
+    }],
+    "provisioners": [{
+        "type": "shell",
+        "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+        "scripts": [
+            "scripts/vmtools.sh",
+            "scripts/postinstall.sh"
+        ]
+    }],
+    "post-processors": [{
+        "type": "vagrant",
+        "output": "build/solaris11.box",
+        "compression_level": 9
+    }]
 }
